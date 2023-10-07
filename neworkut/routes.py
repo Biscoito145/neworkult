@@ -35,7 +35,7 @@ def login():
     if form_login.validate_on_submit() and 'botao_submit_login' in request.form:  # verifica se o formulario de login foi preenchido corretamente e verifica se foi o botao de login, ja que temos dois formularios na pagina, a gente precisa diferenciar, e ai a gente usa o nome do botão para isso, se foi entao. Porque como temos duas condições, pelo fato dos dois forms estarem na mesma página, ele vai querer verifcar os dois, mas a pessoa so vai ter preenchido 1, entao é por isso que usamos esse and...  vai verificar se nessa requisao post que fizemos tem o submit login para o login e o criarconta para o criarconta, entao em suma, ele ta verificando se o formulario foi preecnhido e se o botao clicado foi o de login
         # exibir login bem sucedido
         usuario = Usuario.query.filter_by(email=form_login.email.data).first() # definindo o usuario, onde email é o que ele preencheu, e usando um filtro para localizá-lo no banco de dados
-        if usuario and bcrypt.check_password_hash(usuario.senha,form_login.senha.data): # se o usuario existe no banco de dados e a senha que esta no banco de dados bate com a que ele preencheu no login esta correta:
+        if usuario and bcrypt.check_password_hash(usuario.senha.encode('utf-8'),form_login.senha.data): # se o usuario existe no banco de dados e a senha que esta no banco de dados bate com a que ele preencheu no login esta correta:
             login_user(usuario, remember= form_login.lembrar_dados.data)  # fazendo efetivamente o login do usuario, se a pessoa marcou a caixa é true senão é falso
             flash(f'Login feito com sucesso no e-mail: {form_login.email.data}', 'alert-success')  # para ecibir o email da pessoa, o data exibe o resultado do que a pessoa preecheu
             # redirecionar para homepage
@@ -48,7 +48,7 @@ def login():
             flash(f'Falha no login. E-mail ou senha incorretos','alert-danger') # tipo de alerta danger -> caixa vermelha
     if form_criarconta.validate_on_submit() and 'botao_submit_criarconta' in request.form:
         # criar o Usuario no banco de dados, criamos uma instancia da classe usuario, mas agora os parametros devem ser o que a pessoa digitou
-        senha_cript = bcrypt.generate_password_hash(form_criarconta.senha.data) # criptografando a senha
+        senha_cript = bcrypt.generate_password_hash(form_criarconta.senha.data).decode('utf-8')
         usuario = Usuario(username=form_criarconta.username.data, email=form_criarconta.email.data, senha=senha_cript)  # vou adicionar o que o usuario escreveu
         database.session.add(usuario)  # adicionando no banco de dados
         database.session.commit()
