@@ -22,5 +22,5 @@ Pillow
 PyMySQL==1.1.0
 SQLAlchemy==2.0.21
 typing_extensions
-Werkzeug==2.3.7
+Werkzeug
 WTForms==3.0.1
