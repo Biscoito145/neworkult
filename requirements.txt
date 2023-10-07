@@ -21,6 +21,6 @@ packaging==23.2
 Pillow
 PyMySQL==1.1.0
 SQLAlchemy==2.0.21
-typing_extensions==4.8.0
+typing_extensions
 Werkzeug==2.3.7
 WTForms==3.0.1
