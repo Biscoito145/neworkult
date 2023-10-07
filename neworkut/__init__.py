@@ -3,13 +3,13 @@ from flask import Flask  # da biblioteca flask, estamos importando a classe Flas
 from flask_sqlalchemy import SQLAlchemy # criando nosso banco de dados
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager # gerenciador de login do nosso site
-
+import os
 # colocando no site no ar (codigo padrão)
 app = Flask(__name__)   # Inicializa nosso site
 
 
 app.config['SECRET_KEY'] = 'dmD4W8ZW644lu7J7FjSnEV0r7zvdkI75'  # importante para segurança do formulário
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///comunidade.db' # configuração padra para a construção do banco de dados
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL') # configuração padra para a construção do banco de dados
 
 database = SQLAlchemy(app) # criando uma instância da classe SQLAlchemy
 bcrypt = Bcrypt(app)
