@@ -2,4 +2,4 @@ from neworkut import app #  precisa do app para rodar o site, que ele precisa pa
 
 
 if __name__ == '__main__':  # garantir que  codigo acima so vai rodar se eu estiver excutando o arquivo main
-    app.run(debug=True) # rodar o site, já o debug=True faz com que nosso site rode em modo Debug, significa que toda mudança que vc fizer no codigo vai ser implementada automaticamente no site
+    app.run(debug=False) # rodar o site, já o debug=True faz com que nosso site rode em modo Debug, significa que toda mudança que vc fizer no codigo vai ser implementada automaticamente no site
